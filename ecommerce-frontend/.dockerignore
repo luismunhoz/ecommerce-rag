@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+
+# Build output
+build/
+dist/
+
+# Git
+.git
+.gitignore
+
+# IDE
+.vscode
+.idea
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Test files
+coverage/
+*.test.js
+*.spec.js
+
+# Documentation
+*.md
+
+# Docker
+Dockerfile*
+docker-compose*.yml

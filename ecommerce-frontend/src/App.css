@@ -1,0 +1,16 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px 0;
+}
+
+.page-title {
+  margin-bottom: 30px;
+  font-size: 2rem;
+  color: #333;
+}
