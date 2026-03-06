@@ -42,6 +42,11 @@ app:
     max-results: 10
     min-score: 0.65
 
+  rag:
+    chat-model: gpt-4o-mini   # OpenAI model used for answer generation
+    temperature: 0.3           # Lower = more factual, less creative
+    max-context-products: 5    # How many retrieved products to inject as context
+
   jwt:
     secret: ${JWT_SECRET:dGhpc2lzYXZlcnlsb25nc2VjcmV0a2V5Zm9yand0dG9rZW5nZW5lcmF0aW9uYW5kdmFsaWRhdGlvbg==}
     expiration-ms: ${JWT_EXPIRATION:86400000}

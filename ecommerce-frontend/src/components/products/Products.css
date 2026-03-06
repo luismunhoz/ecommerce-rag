@@ -52,6 +52,41 @@
   letter-spacing: 0.05em;
 }
 
+.ai-answer-box {
+  background: linear-gradient(135deg, #f3eeff 0%, #ede7ff 100%);
+  border: 1px solid #c9b8f0;
+  border-left: 4px solid #6f42c1;
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin-bottom: 28px;
+}
+
+.ai-answer-header {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: #6f42c1;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.ai-answer-text {
+  color: #2d2d2d;
+  line-height: 1.7;
+  margin: 0 0 12px 0;
+  white-space: pre-wrap;
+}
+
+.ai-answer-sources-label {
+  font-size: 0.8rem;
+  color: #7c6fa0;
+  margin: 0;
+  border-top: 1px solid #c9b8f0;
+  padding-top: 10px;
+}
+
 .search-input {
   padding: 10px 15px;
   border: 1px solid #ddd;

@@ -8,6 +8,7 @@ import './Products.css';
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
+  const [aiAnswer, setAiAnswer] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
@@ -20,6 +21,7 @@ const ProductList = () => {
     const fetchProducts = async () => {
       setLoading(true);
       setError('');
+      setAiAnswer('');
 
       try {
         const query = searchParams.get('q');
@@ -27,8 +29,9 @@ const ProductList = () => {
         let data;
 
         if (query && isAi) {
-          const results = await productsApi.semanticSearch(query);
-          setProducts(results || []);
+          const result = await productsApi.chatAsk(query);
+          setAiAnswer(result.answer || '');
+          setProducts(result.sources || []);
           setTotalPages(0);
           return;
         } else if (query) {
@@ -121,6 +124,21 @@ const ProductList = () => {
           {isAiResults && <span className="ai-badge">AI</span>}
           Showing results for: <strong>{query}</strong>
         </p>
+      )}
+
+      {isAiResults && aiAnswer && (
+        <div className="ai-answer-box">
+          <div className="ai-answer-header">
+            <span className="ai-badge">AI</span>
+            Assistant
+          </div>
+          <p className="ai-answer-text">{aiAnswer}</p>
+          {products.length > 0 && (
+            <p className="ai-answer-sources-label">
+              Based on {products.length} product{products.length !== 1 ? 's' : ''} from our catalog
+            </p>
+          )}
+        </div>
       )}
 
       {products.length === 0 ? (

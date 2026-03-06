@@ -1,7 +1,9 @@
 package com.ecommerce.infrastructure.config;
 
 import dev.langchain4j.data.segment.TextSegment;
+import dev.langchain4j.model.chat.ChatLanguageModel;
 import dev.langchain4j.model.embedding.EmbeddingModel;
+import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.model.openai.OpenAiEmbeddingModel;
 import dev.langchain4j.store.embedding.EmbeddingStore;
 import dev.langchain4j.store.embedding.pgvector.PgVectorEmbeddingStore;
@@ -14,6 +16,12 @@ public class EmbeddingConfig {
 
     @Value("${OPENAI_API_KEY}")
     private String openAiApiKey;
+
+    @Value("${app.rag.chat-model:gpt-4o-mini}")
+    private String chatModelName;
+
+    @Value("${app.rag.temperature:0.3}")
+    private double temperature;
 
     @Value("${DB_HOST:localhost}")
     private String dbHost;
@@ -35,6 +43,15 @@ public class EmbeddingConfig {
         return OpenAiEmbeddingModel.builder()
                 .apiKey(openAiApiKey)
                 .modelName("text-embedding-3-small") // 1536 dimensions, low cost
+                .build();
+    }
+
+    @Bean
+    public ChatLanguageModel chatLanguageModel() {
+        return OpenAiChatModel.builder()
+                .apiKey(openAiApiKey)
+                .modelName(chatModelName)
+                .temperature(temperature)
                 .build();
     }
 

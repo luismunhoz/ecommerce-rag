@@ -26,6 +26,11 @@ export const productsApi = {
     return response.data;
   },
 
+  chatAsk: async (question) => {
+    const response = await axios.post('/chat/ask', { question });
+    return response.data; // { answer: string, sources: ProductDTO[] }
+  },
+
   create: async (productData) => {
     const response = await axios.post('/products', productData);
     return response.data;
