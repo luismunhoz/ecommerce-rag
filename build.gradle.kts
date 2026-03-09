@@ -7,6 +7,10 @@ plugins {
 group = "com.ecommerce"
 version = "1.0.0"
 
+// Override Spring Boot BOM versions to patch transitive CVEs
+extra["postgresql.version"] = "42.7.7"       // CVE-2024-1597 + CVE-2025-49146 (channel binding bypass, CVSS 8.2) — fixed in 42.7.7
+extra["commons-lang3.version"] = "3.18.0"    // CVE-2025-48924 (ClassUtils uncontrolled recursion, CVSS 5.3) — fixed in 3.18.0
+
 java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
@@ -45,9 +49,9 @@ dependencies {
     implementation("org.flywaydb:flyway-database-postgresql:10.6.0")
 
     // JWT
-    implementation("io.jsonwebtoken:jjwt-api:0.12.3")
-    runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.3")
-    runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.12.3")
+    implementation("io.jsonwebtoken:jjwt-api:0.12.6")
+    runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.6")       // CVE-2024-31033 (CVSS 6.8) — fixed in 0.12.6
+    runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.12.6")
 
     // Lombok
     compileOnly("org.projectlombok:lombok")
@@ -71,8 +75,6 @@ tasks.test {
 
 // Cucumber task
 tasks.register<Test>("cucumber") {
-    useJUnitPlatform {
-        includeTags("cucumber")
-    }
+    useJUnitPlatform()
     systemProperty("cucumber.junit-platform.naming-strategy", "long")
 }
