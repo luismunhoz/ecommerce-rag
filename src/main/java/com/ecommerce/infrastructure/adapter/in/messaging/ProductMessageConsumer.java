@@ -10,10 +10,12 @@ import com.ecommerce.domain.port.out.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
+@Profile("!test")
 @RequiredArgsConstructor
 public class ProductMessageConsumer {
 
