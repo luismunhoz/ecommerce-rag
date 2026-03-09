@@ -88,7 +88,7 @@ driven by an external system publishing messages to a RabbitMQ queue. All produc
 
 ### For Docker (recommended)
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/) or Docker Engine + Compose plugin
-- An **OpenAI API key** — required for semantic search and the AI chat assistant
+- An **OpenAI API key** : required for semantic search and the AI chat assistant
 
 ### For local development
 - Java 17
@@ -101,21 +101,21 @@ driven by an external system publishing messages to a RabbitMQ queue. All produc
 
 ## Environment Variables
 
-| Variable            | Required | Default        | Description                                      |
-|---------------------|----------|----------------|--------------------------------------------------|
-| `OPENAI_API_KEY`    | **Yes**  | —              | OpenAI API key — used for embeddings and chat    |
-| `DB_HOST`           | No       | `localhost`    | PostgreSQL host                                  |
-| `DB_PORT`           | No       | `5432`         | PostgreSQL port                                  |
-| `DB_NAME`           | No       | `ecommerce`    | PostgreSQL database name                         |
-| `DB_USERNAME`       | No       | `ecommerce`    | PostgreSQL username                              |
-| `DB_PASSWORD`       | No       | `ecommerce`    | PostgreSQL password                              |
-| `RABBITMQ_HOST`     | No       | `localhost`    | RabbitMQ host                                    |
-| `RABBITMQ_PORT`     | No       | `5672`         | RabbitMQ AMQP port                               |
-| `RABBITMQ_USERNAME` | No       | `guest`        | RabbitMQ username                                |
-| `RABBITMQ_PASSWORD` | No       | `guest`        | RabbitMQ password                                |
-| `JWT_SECRET`        | No       | *(base64 key)* | JWT signing secret                               |
-| `JWT_EXPIRATION`    | No       | `86400000`     | JWT expiry in milliseconds (default 24 h)        |
-| `SERVER_PORT`       | No       | `8080`         | Backend HTTP port                                |
+| Variable            | Required | Default        | Description                                   |
+|---------------------|----------|----------------|-----------------------------------------------|
+| `OPENAI_API_KEY`    | **Yes**  | -              | OpenAI API key : used for embeddings and chat |
+| `DB_HOST`           | No       | `localhost`    | PostgreSQL host                               |
+| `DB_PORT`           | No       | `5432`         | PostgreSQL port                               |
+| `DB_NAME`           | No       | `ecommerce`    | PostgreSQL database name                      |
+| `DB_USERNAME`       | No       | `ecommerce`    | PostgreSQL username                           |
+| `DB_PASSWORD`       | No       | `ecommerce`    | PostgreSQL password                           |
+| `RABBITMQ_HOST`     | No       | `localhost`    | RabbitMQ host                                 |
+| `RABBITMQ_PORT`     | No       | `5672`         | RabbitMQ AMQP port                            |
+| `RABBITMQ_USERNAME` | No       | `guest`        | RabbitMQ username                             |
+| `RABBITMQ_PASSWORD` | No       | `guest`        | RabbitMQ password                             |
+| `JWT_SECRET`        | No       | *(base64 key)* | JWT signing secret                            |
+| `JWT_EXPIRATION`    | No       | `86400000`     | JWT expiry in milliseconds (default 24 h)     |
+| `SERVER_PORT`       | No       | `8080`         | Backend HTTP port                             |
 
 ### RAG configuration (application.yml)
 
@@ -145,7 +145,7 @@ export OPENAI_API_KEY=sk-...
 docker compose up --build
 ```
 
-This starts four containers in order: RabbitMQ -> PostgreSQL -> Backend -> Frontend.
+This starts four containers in order: RabbitMQ → PostgreSQL → Backend → Frontend.
 
 > The first build takes several minutes as Gradle downloads dependencies. Subsequent builds are faster due to Docker layer caching.
 
@@ -226,7 +226,7 @@ The Swagger UI provides interactive documentation for every API endpoint.
 
 ### Publishing a test message
 
-1. Go to **Exchanges** -> click `product.exchange`
+1. Go to **Exchanges** → click `product.exchange`
 2. Set **Routing key:** `product.sync`, **Properties:** `content_type = application/json`
 3. Paste a payload from the [Product Sync Queue](#product-sync-queue) section and click **Publish message**
 
@@ -234,7 +234,7 @@ The Swagger UI provides interactive documentation for every API endpoint.
 
 ## IntelliJ DataSource Configuration
 
-**View -> Tool Windows -> Database -> Data Source -> PostgreSQL**
+**View → Tool Windows → Database → Data Source → PostgreSQL**
 
 | Field    | Value                                        |
 |----------|----------------------------------------------|
@@ -426,15 +426,15 @@ All order endpoints require authentication.
 | Method | Endpoint                           | Auth  | Description                           |
 |--------|------------------------------------|-------|---------------------------------------|
 | POST   | `/api/orders`                      | Yes   | Create order from item list           |
-| POST   | `/api/orders/from-cart`            | Yes   | Checkout cart -> order                |
+| POST   | `/api/orders/from-cart`            | Yes   | Checkout cart → order                 |
 | GET    | `/api/orders`                      | Yes   | Get current user's orders             |
 | GET    | `/api/orders/paged`                | Yes   | Get current user's orders (paginated) |
 | GET    | `/api/orders/{id}`                 | Yes   | Get order by ID                       |
 | GET    | `/api/orders/number/{orderNumber}` | Yes   | Get order by order number             |
 | GET    | `/api/orders/admin/all`            | ADMIN | List all orders (paginated)           |
-| PATCH  | `/api/orders/{id}/confirm`         | ADMIN | PENDING -> CONFIRMED                  |
-| PATCH  | `/api/orders/{id}/ship`            | ADMIN | CONFIRMED -> SHIPPED                  |
-| PATCH  | `/api/orders/{id}/deliver`         | ADMIN | SHIPPED -> DELIVERED                  |
+| PATCH  | `/api/orders/{id}/confirm`         | ADMIN | PENDING → CONFIRMED                   |
+| PATCH  | `/api/orders/{id}/ship`            | ADMIN | CONFIRMED → SHIPPED                   |
+| PATCH  | `/api/orders/{id}/deliver`         | ADMIN | SHIPPED → DELIVERED                   |
 | PATCH  | `/api/orders/{id}/cancel`          | Yes   | Cancel order                          |
 
 **Create order body:**
@@ -455,7 +455,7 @@ All order endpoints require authentication.
 POST /api/orders/from-cart?shippingAddress=123+Main+St&paymentMethod=CREDIT_CARD
 ```
 
-**Order status flow:** `PENDING -> CONFIRMED -> PROCESSING -> SHIPPED -> DELIVERED`
+**Order status flow:** `PENDING → CONFIRMED → PROCESSING → SHIPPED → DELIVERED`
 
 ---
 
@@ -557,7 +557,7 @@ curl -X POST http://localhost:8080/api/products/reindex \
 
 **Seed data:** a ready-to-use SQL script with 10 categories and 100+ computer equipment
 products is available at `src/main/resources/db/seed_products.sql`.
-Run it via pgAdmin 4 (Query Tool -> open file -> F5) or via CLI:
+Run it via pgAdmin 4 (Query Tool → open file → F5) or via CLI:
 
 ```bash
 psql -U ecommerce -d ecommerce -f src/main/resources/db/seed_products.sql
