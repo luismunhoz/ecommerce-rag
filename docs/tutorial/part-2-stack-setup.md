@@ -1,4 +1,4 @@
-# Building a RAG-Powered eCommerce App in Java - Part 2: Setting Up the Stack
+# Building a RAG-Powered eCommerce App in Java. Part 2: Setting Up the Stack
 
 > **Series**
 > - Part 1 : What is RAG?
@@ -48,7 +48,7 @@ src/main/java/com/ecommerce/
 
 ---
 
-## Dependencies - build.gradle.kts
+## Dependencies: build.gradle.kts
 
 ```kotlin
 dependencies {
@@ -151,7 +151,7 @@ CREATE TABLE products (
 );
 ```
 
-The interesting one is V7 - this is where pgvector comes in:
+The interesting one is V7. This is where pgvector comes in:
 
 ```sql
 -- V7__product_embeddings.sql
@@ -182,7 +182,7 @@ Three things to notice:
 
 ---
 
-## Configuring LangChain4j - EmbeddingConfig
+## Configuring LangChain4j: EmbeddingConfig
 
 All LangChain4j beans are created in a single Spring `@Configuration` class:
 
@@ -241,7 +241,7 @@ adjust column names, or track migrations in Flyway. Always manage the schema you
 
 ---
 
-## application.yml - the RAG configuration block
+## application.yml: the RAG configuration block
 
 ```yaml
 app:
